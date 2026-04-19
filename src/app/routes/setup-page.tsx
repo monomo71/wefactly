@@ -1,5 +1,8 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { submitInitialSetup } from '@/lib/bootstrap/bootstrap-service';
 import { validateSetupForm } from '@/lib/validation/setup-schema';
 import type { SetupFormValues } from '@/types/auth';
@@ -141,21 +144,13 @@ export function SetupPage() {
             </div>
           </section>
 
-          {errorMessage ? (
-            <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-              {errorMessage}
-            </div>
-          ) : null}
+          {errorMessage ? <Alert variant="error">{errorMessage}</Alert> : null}
 
           <div className="flex items-center justify-between gap-4 border-t border-border pt-6">
             <p className="text-sm text-slate-600">Na afronding wordt deze publieke setup niet opnieuw getoond.</p>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-60"
-            >
+            <Button type="submit" isLoading={isSubmitting}>
               {isSubmitting ? 'Bezig met opslaan...' : 'Setup afronden'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>
@@ -179,11 +174,10 @@ function Field({ label, value, onChange, error, type = 'text', required = false 
         {label}
         {required ? ' *' : ''}
       </span>
-      <input
+      <Input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-md border border-border bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
       />
       {error ? <span className="mt-1 block text-xs text-red-600">{error}</span> : null}
     </label>

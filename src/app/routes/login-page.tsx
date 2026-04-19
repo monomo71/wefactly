@@ -1,5 +1,8 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { Alert } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { getCurrentAuthSession, loginWithEmailPassword } from '@/lib/auth/auth-service';
 import { getSetupSnapshot } from '@/lib/bootstrap/bootstrap-service';
 import { validateLoginForm } from '@/lib/validation/login-schema';
@@ -81,20 +84,12 @@ export function LoginPage() {
             error={errors.password}
           />
 
-          {errorMessage ? (
-            <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-              {errorMessage}
-            </div>
-          ) : null}
+          {errorMessage ? <Alert variant="error">{errorMessage}</Alert> : null}
 
           <div className="flex items-center justify-end pt-2">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground disabled:opacity-60"
-            >
+            <Button type="submit" isLoading={isSubmitting}>
               {isSubmitting ? 'Bezig met inloggen...' : 'Inloggen'}
-            </button>
+            </Button>
           </div>
         </form>
       </div>
@@ -114,11 +109,10 @@ function Field({ label, value, onChange, error, type = 'text' }: FieldProps) {
   return (
     <label className="block text-sm font-medium text-foreground">
       <span className="mb-1 block">{label}</span>
-      <input
+      <Input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-md border border-border bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
       />
       {error ? <span className="mt-1 block text-xs text-red-600">{error}</span> : null}
     </label>

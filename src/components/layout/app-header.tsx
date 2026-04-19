@@ -7,7 +7,7 @@ interface AppHeaderProps {
 
 export function AppHeader({ userName }: AppHeaderProps) {
   return (
-    <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-4">
+    <header className="print-hidden flex items-center justify-between border-b border-border bg-surface px-6 py-4">
       <div>
         <p className="text-sm font-medium text-foreground">weFactly</p>
         <p className="text-xs text-slate-500">Phase 1 foundation</p>

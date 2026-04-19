@@ -2,12 +2,16 @@ import { NavLink } from 'react-router-dom';
 
 const navigationItems = [
   { to: '/dashboard', label: 'Dashboard' },
+  { to: '/customers', label: 'Customers' },
+  { to: '/products', label: 'Products' },
+  { to: '/quotes', label: 'Quotes' },
+  { to: '/invoices', label: 'Invoices' },
   { to: '/settings', label: 'Settings' },
 ];
 
 export function AppSidebar() {
   return (
-    <aside className="flex w-full max-w-64 flex-col border-r border-border bg-surface px-4 py-6">
+    <aside className="print-hidden flex w-full max-w-64 flex-col border-r border-border bg-surface px-4 py-6">
       <div className="mb-6 px-2">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">weFactly</p>
         <p className="mt-2 text-lg font-semibold text-foreground">Fundament</p>
